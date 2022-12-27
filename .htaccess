@@ -224,13 +224,16 @@ order allow,deny
 allow from all
 deny from XX.XXX.XXX.X/XX
 #######Bloquear ips#######
-<IfModule mod_rewrite.c>
-Options +FollowSymLinks -MultiViews
-RewriteEngine On
-RewriteBase /
+#########Extensao1###############
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
-RewriteRule ^ %1 [R,L]
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.*?)/?$ $1.html [L]
-</IfModule>
+RewriteRule ^ %1 [R,NC]
+#########Extensao1###############
+
+#########Extensao2###############
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+#########Extensao2###############
+
+#########Extensao3###############
+RewriteEngine On
+RewriteRule ^([0-9A-Za-z-_]+)$ /$1.html
+#########Extensao3###############
